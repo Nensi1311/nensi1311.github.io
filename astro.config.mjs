@@ -37,13 +37,13 @@ export default defineConfig({
     }),
     robotsTxt({
       sitemap: [
-        "https://nensipansuriya.github.io/sitemap-0.xml",
-        "https://nensipansuriya.github.io/sitemap-index.xml",
+        "https://nensi1311.github.io/sitemap-0.xml",
+        "https://nensi1311.github.io/sitemap-index.xml",
       ],
     }),
     playformCompress(),
   ],
-  site: "https://nensipansuriya.github.io/",
+  site: "https://nensi1311.github.io/",
   output: "static",
   outDir: "./docs",
   build: {
