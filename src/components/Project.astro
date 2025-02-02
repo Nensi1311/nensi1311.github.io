@@ -1,0 +1,101 @@
+---
+import { Image } from "astro:assets";
+import { getData } from "../utils/projects";
+const data = getData();
+---
+
+<section id="projects" class="text-primary body-font w-5/6 mx-auto mt-48">
+  <div class="mx-auto">
+    <h1
+      data-aos="fade-up"
+      data-aos-anchor-placement="center-bottom"
+      class="mb-8 font-extrabold text-center text-4xl text-transparent bg-clip-text bg-gradient-to-tr from-[#d7d7d7] to-[#616161] sm:text-3xl md:text-5xl"
+    >
+      My Projects
+    </h1>
+
+    <p
+      data-aos="fade-up"
+      data-aos-anchor-placement="center-bottom"
+      class="text-gray-400 font-medium text-lg text-center mb-16 w-full mx-auto"
+    >
+      Dive into my portfolio to see the diverse range of AI-driven technologies and machine learning projects I've worked on.
+    </p>
+    <div class="flex items-center justify-between py-8">
+      <h1 class="text-primary text-xl sm:text-3xl font-semibold">
+        Key Projects
+      </h1>
+      <a
+        class="text-primary px-4 py-2.5 bg-primary rounded-xl bg-opacity-10"
+        aria-label="projects link"
+        href="/projects"
+      >
+        View all</a
+      >
+    </div>
+    <div
+      class="mx-auto grid grid-cols-1 gap-8 md:grid md:grid-cols-2 lg:grid lg:grid-cols-3 xl:grid xl:grid-cols-3"
+    >
+      {
+        data &&
+          data.slice(0, 3).map((item, index) => {
+            return (
+              <a
+                data-aos="fade-up"
+                data-aos-anchor-placement="center-bottom"
+                href={`${item.url}`}
+                class="relative mx-auto  overflow-hidden rounded-xl bg-transparent  border border-1 border-primary border-opacity-25 shadow-xl"
+              >
+                <div class="bg-transparent">
+                  <Image
+                    src={item.image}
+                    class=" object-cover bg-cover rounded-t-xl"
+                    alt=""
+                    transition:name={item.name}
+                  />
+                </div>
+                <div class=" z-20 py-4 px-4 rounded-b-xl bg-opacity-75">
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <h1 class="text-xl  font-bold text-white">{item.name}</h1>
+                      <p class="mb-1 text-sm text-white text-opacity-80">
+                        {item.type}
+                      </p>
+                    </div>
+                    <button
+                      aria-label={item.name}
+                      class="p-2 mr-2 bg-primary rounded-full bg-opacity-10"
+                    >
+                      <svg
+                        class="fill-primary h-6"
+                        viewBox="0 0 24 24"
+                        height="1em"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <g
+                          id="SVGRepo_tracerCarrier"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <a>
+                          <g id="SVGRepo_bgCarrier" stroke-width="0" />
+                          <g id="SVGRepo_iconCarrier">
+                            <path
+                              fill-rule="evenodd"
+                              clip-rule="evenodd"
+                              d="M12.2929 4.29289C12.6834 3.90237 13.3166 3.90237 13.7071 4.29289L20.7071 11.2929C21.0976 11.6834 21.0976 12.3166 20.7071 12.7071L13.7071 19.7071C13.3166 20.0976 12.6834 20.0976 12.2929 19.7071C11.9024 19.3166 11.9024 18.6834 12.2929 18.2929L17.5858 13H4C3.44772 13 3 12.5523 3 12C3 11.4477 3.44772 11 4 11H17.5858L12.2929 5.70711C11.9024 5.31658 11.9024 4.68342 12.2929 4.29289Z"
+                            />
+                          </g>
+                        </>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </a>
+            );
+          })
+      }
+    </div>
+  </div>
+</section>

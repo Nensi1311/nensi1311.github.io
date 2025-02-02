@@ -1,0 +1,128 @@
+---
+import "@fontsource-variable/space-grotesk";
+import "@fontsource-variable/manrope";
+import "@fontsource/poppins/100.css";
+import "@fontsource/poppins/200.css";
+import "@fontsource/poppins/300.css";
+import "@fontsource/poppins/400.css";
+import "@fontsource/poppins/500.css";
+import "@fontsource/poppins/600.css";
+import "@fontsource/poppins/700.css";
+import "@fontsource/poppins/800.css";
+import "@fontsource/poppins/900.css";
+
+import { SEO } from "astro-seo";
+const canonicalURL = new URL(Astro.url.pathname, Astro.url.origin).toString();
+const resolvedImageWithDomain = new URL(
+  "/image.jpeg",
+  Astro.url.origin
+).toString();
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+import { ViewTransitions } from "astro:transitions";
+import preload from "astro-preload";
+import Glow from "../components/Glow";
+const makeTitle = title ? title : "Nensi Pansuriya | Portfolio";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="Nensi Pansuriya - Artificial Intelligence and Machine Learning Engineer. Explore my portfolio showcasing my expertise in developing solutions using AI"
+    />
+    <meta
+      name="keywords"
+      Nensi Pansuriya, AI-ML Engineer, Software Developer, python, Numpy, Panda, OpenCV, Portfolio, AI Solutions, PyTorch, Keras, Scikit learn, Responsive Design, Software Engineer, Code, Programming, Tech Enthusiast, Project Showcase, AI ML Engineer, Web Applications, MySQL, Git, Version Control, Performance Optimization, Cross-Browser Compatibility, Innovative Solutions, Problem-Solving, Technical Skills, Professional Experience, Open Source Contributions, Personal Projects, Code Quality, Debugging, Collaboration, GitHub, Software Architecture, Coding Standards, User Experience, Web Design, Creative Coding, AI ML Engineer Portfolio, Online Presence, Digital Resume, Tech Stack, Technical Portfolio, Developer Showcase, Programming Portfolio, AI ML Developer Bio, Professional Background, Personal Achievements, Technical Expertise, Computer Science, Backend Engineer, Frontend Engineer, AI ML Developer Resume, Professional AI ML Developer, Portfolio Website, Innovative AI ML Solutions, Experienced Developer, AI ML Services, Coding Portfolio, Programming Portfolio, AI ML Engineer Portfolio, Full Stack AI ML Portfolio, Online Portfolio, Creative Developer, Personal Portfolio, Tech Portfolio, Showcase Projects, Technology Enthusiast, Code Portfolio, GitHub Repository, AI ML Showcase, Portfolio Design, Code Showcase, Modern AI ML Developer, Digital Portfolio, Tech Projects, Innovative Coding, Full Stack AI ML Skills, AI ML Career, Building AI ML Applications, Code Portfolio Showcase, Developer Journey, Code Quality Standards, AI ML Process, Professional AI ML Developer, AI ML Expertise, Frontend AI ML Skills, Backend AI ML Skills, Programming Languages, AI ML Technologies, Coding Standards, AI ML Tools, AI ML Portfolio Showcase, AI ML Experience, Tailwind CSS Portfolio, React Portfolio, Astro Framework Portfolio, Personal Website, SEO-Friendly Portfolio, Optimized Code, AI ML Best Practices
+    />
+    <meta name="author" content="Nensi Pansuriya" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="google-site-verification" 
+      content="-2hRwLkwGh_hyZjowcHY4fJhf8wIkHomHK7UDFI27qw" 
+    />
+    <meta name="generator" content={Astro.generator} />
+    <SEO
+      title={makeTitle}
+      description="Nensi Pansuriya - Portfolio"
+      canonical={canonicalURL}
+      twitter={{
+        creator: "@nensi",
+        site: "@nensi",
+        card: "summary_large_image",
+      }}
+      openGraph={{
+        basic: {
+          url: canonicalURL,
+          type: "website",
+          title: `Nensi Pansuriya | Portfolio`,
+          image: resolvedImageWithDomain,
+        },
+        image: {
+          alt: "Nensi Pansuriya",
+        },
+        optional: {
+          description: `Nensi Pansuriya - Portfolio`,
+        },
+      }}
+    />
+    <script
+      type="text/partytown"
+      src="https://www.googletagmanager.com/gtag/js?id=G-S9TKKTL84G"></script>
+    <script type="text/partytown">
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-S9TKKTL84G");
+    </script>
+
+    <title>{title}</title>
+      <meta name="google-site-verification" 
+      content="-2hRwLkwGh_hyZjowcHY4fJhf8wIkHomHK7UDFI27qw" 
+    />
+  </head>
+  <body>
+    <Glow client:only />
+    <slot />
+
+    <style is:global>
+      * {
+      }
+      img {
+        content-visibility: auto;
+      }
+      body {
+        cursor: url("/cursor.png"), auto;
+        font-family: "Poppins", sans-serif;
+        background: #00001a;
+        background-size: 22px 22px;
+        overflow-x: hidden;
+      }
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background-color: rgba(20, 20, 20);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+        background: #5b5b5b;
+      }
+    </style>
+    <script src="../utils/aos.js"></script>
+  </body>
+</html>

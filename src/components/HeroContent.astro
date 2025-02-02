@@ -1,0 +1,51 @@
+---
+import { Image } from "astro:assets";
+import pfp from "../../public/ssa.svg";
+---
+
+<div data-aos="fade-up" class="mx-auto py-4 lg:py-4">
+  <div class="w-96 text-center mx-auto flex justify-center">
+    <Image
+      class="w-80 rounded-full text-center stroke-slate-50 stroke-2"
+      src={pfp}
+      alt="Nensi Pansuriya"
+      loading="eager"
+    />
+  </div>
+  <div class="text-center">
+    <p
+      class="text-3xl pt-4 font-bold text-primary text-transparent bg-clip-text bg-gradient-to-r from-[#d7d7d7] to-[#616161] sm:text-3xl md:text-5xl pb-2"
+    >
+      Hi, I&apos;m Nensi Pansuriya
+    </p>
+    <p
+      class="text-base mt-4 font-bold text-primary text-transparent bg-clip-text bg-gradient-to-r from-[#d7d7d7] to-[#616161] sm:text-xl md:text-3xl pb-2"
+    >
+      A tech-forward AI-ML engineer, always exploring new possibilities and transforming concepts into reality!
+    </p>
+    <a href="/#about" class="cursor-pointer w-full h-full z-50">
+      <svg
+        viewBox="0 0 24 24"
+        class="animate-bounce stroke-primary h-8 flex justify-center w-full mt-3 sm:mt-6 sm:h-10"
+        height="1em"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        ><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g
+          id="SVGRepo_tracerCarrier"
+          stroke-linecap="round"
+          stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier">
+          <path
+            d="M19 9L14 14.1599C13.7429 14.4323 13.4329 14.6493 13.089 14.7976C12.7451 14.9459 12.3745 15.0225 12 15.0225C11.6255 15.0225 11.2549 14.9459 10.9109 14.7976C10.567 14.6493 10.2571 14.4323 10 14.1599L5 9"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </g></svg
+      >
+    </a>
+  </div>
+</div>
+<style is:inline>
+  :root {
+    --color: rgba(71, 71, 71, 0.918);
+  }
+</style>
