@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Brain, Code, Database, Sparkles } from "lucide-react";
-import AITerminal from "./AITerminal";
+import AITerminal from "./AiTerminal";
 
 export default function AboutSection() {
   const highlights = [
