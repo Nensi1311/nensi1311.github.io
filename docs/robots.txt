@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://nensi1311.github.io/sitemap-0.xml
-Sitemap: https://nensi1311.github.io/sitemap-index.xml
