@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "@/components/portfolio/Navbar";
+import NeuralBackground from "@/components/portfolio/NeuralBackground";
 import HeroSection from "@/components/portfolio/HeroSection";
 import AboutSection from "@/components/portfolio/AboutSection";
 import SkillsSection from "@/components/portfolio/SkillsSection";
@@ -13,7 +14,8 @@ import Footer from "@/components/portfolio/Footer";
 
 export default function Home() {
   return (
-    <div className="bg-slate-950 min-h-screen">
+    <div className="relative min-h-screen text-slate-900 dark:text-white">
+      <NeuralBackground />
       <Navbar />
       <HeroSection />
       <AboutSection />

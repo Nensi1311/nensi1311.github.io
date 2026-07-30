@@ -1,337 +1,13 @@
-// import React, { useEffect, useRef } from "react";
-// import { motion } from "framer-motion";
-
-// // Animated SVG Robot
-// function Robot() {
-//   return (
-//     <motion.div
-//       className="relative"
-//       animate={{ y: [0, -12, 0] }}
-//       transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
-//     >
-//       <svg
-//         viewBox="0 0 200 260"
-//         width="200"
-//         height="260"
-//         xmlns="http://www.w3.org/2000/svg"
-//       >
-//         {/* Glow effect */}
-//         <defs>
-//           <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%">
-//             <stop offset="0%" stopColor="#a855f7" stopOpacity="0.4" />
-//             <stop offset="100%" stopColor="#a855f7" stopOpacity="0" />
-//           </radialGradient>
-//           <filter id="glow">
-//             <feGaussianBlur stdDeviation="3" result="coloredBlur" />
-//             <feMerge>
-//               <feMergeNode in="coloredBlur" />
-//               <feMergeNode in="SourceGraphic" />
-//             </feMerge>
-//           </filter>
-//           <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-//             <stop offset="0%" stopColor="#1e1b4b" />
-//             <stop offset="100%" stopColor="#312e81" />
-//           </linearGradient>
-//           <linearGradient id="headGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-//             <stop offset="0%" stopColor="#1e1b4b" />
-//             <stop offset="100%" stopColor="#4c1d95" />
-//           </linearGradient>
-//         </defs>
-
-//         {/* Antenna */}
-//         <motion.line
-//           x1="100" y1="15" x2="100" y2="35"
-//           stroke="#a855f7" strokeWidth="3" strokeLinecap="round"
-//         />
-//         <motion.circle
-//           cx="100" cy="10" r="6"
-//           fill="#a855f7" filter="url(#glow)"
-//           animate={{ opacity: [1, 0.3, 1], r: [6, 8, 6] }}
-//           transition={{ duration: 1.5, repeat: Infinity }}
-//         />
-
-//         {/* Head */}
-//         <rect x="60" y="35" width="80" height="65" rx="16" fill="url(#headGrad)" stroke="#6d28d9" strokeWidth="1.5" />
-
-//         {/* Eyes */}
-//         <motion.rect
-//           x="74" y="52" width="22" height="16" rx="6"
-//           fill="#0f172a"
-//           animate={{ scaleY: [1, 0.1, 1] }}
-//           transition={{ duration: 4, repeat: Infinity, times: [0, 0.5, 0.6] }}
-//         />
-//         <motion.rect
-//           x="104" y="52" width="22" height="16" rx="6"
-//           fill="#0f172a"
-//           animate={{ scaleY: [1, 0.1, 1] }}
-//           transition={{ duration: 4, repeat: Infinity, times: [0, 0.5, 0.6] }}
-//         />
-//         {/* Eye glow */}
-//         <motion.rect
-//           x="76" y="54" width="18" height="12" rx="5"
-//           fill="#a855f7"
-//           animate={{ opacity: [0.9, 0.4, 0.9] }}
-//           transition={{ duration: 2, repeat: Infinity }}
-//           filter="url(#glow)"
-//         />
-//         <motion.rect
-//           x="106" y="54" width="18" height="12" rx="5"
-//           fill="#a855f7"
-//           animate={{ opacity: [0.9, 0.4, 0.9] }}
-//           transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
-//           filter="url(#glow)"
-//         />
-
-//         {/* Mouth - data scan line */}
-//         <rect x="78" y="82" width="44" height="8" rx="4" fill="#0f172a" />
-//         <motion.rect
-//           x="80" y="84" width="8" height="4" rx="2"
-//           fill="#22d3ee"
-//           animate={{ x: [80, 110, 80] }}
-//           transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-//         />
-
-//         {/* Neck */}
-//         <rect x="88" y="100" width="24" height="14" rx="4" fill="#312e81" stroke="#6d28d9" strokeWidth="1" />
-
-//         {/* Body */}
-//         <rect x="45" y="114" width="110" height="90" rx="18" fill="url(#bodyGrad)" stroke="#6d28d9" strokeWidth="1.5" />
-
-//         {/* Chest panel */}
-//         <rect x="60" y="124" width="80" height="60" rx="10" fill="#0f172a" stroke="#4c1d95" strokeWidth="1" />
-
-//         {/* Neural network dots on chest */}
-//         {[
-//           { cx: 80, cy: 138 }, { cx: 100, cy: 138 }, { cx: 120, cy: 138 },
-//           { cx: 90, cy: 155 }, { cx: 110, cy: 155 },
-//           { cx: 100, cy: 172 },
-//         ].map((dot, i) => (
-//           <motion.circle
-//             key={i}
-//             cx={dot.cx} cy={dot.cy} r="4"
-//             fill="#a855f7"
-//             animate={{ opacity: [0.3, 1, 0.3] }}
-//             transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }}
-//             filter="url(#glow)"
-//           />
-//         ))}
-//         {/* Neural connections */}
-//         <line x1="80" y1="138" x2="90" y2="155" stroke="#6d28d9" strokeWidth="1" opacity="0.6" />
-//         <line x1="100" y1="138" x2="90" y2="155" stroke="#6d28d9" strokeWidth="1" opacity="0.6" />
-//         <line x1="100" y1="138" x2="110" y2="155" stroke="#6d28d9" strokeWidth="1" opacity="0.6" />
-//         <line x1="120" y1="138" x2="110" y2="155" stroke="#6d28d9" strokeWidth="1" opacity="0.6" />
-//         <line x1="90" y1="155" x2="100" y2="172" stroke="#6d28d9" strokeWidth="1" opacity="0.6" />
-//         <line x1="110" y1="155" x2="100" y2="172" stroke="#6d28d9" strokeWidth="1" opacity="0.6" />
-
-//         {/* Left arm */}
-//         <motion.g
-//           animate={{ rotate: [-8, 8, -8] }}
-//           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-//           style={{ transformOrigin: "45px 125px" }}
-//         >
-//           <rect x="20" y="114" width="28" height="70" rx="14" fill="url(#bodyGrad)" stroke="#6d28d9" strokeWidth="1.5" />
-//           <motion.circle cx="34" cy="192" r="10" fill="#1e1b4b" stroke="#6d28d9" strokeWidth="1.5" />
-//           <motion.circle
-//             cx="34" cy="192" r="5"
-//             fill="#22d3ee"
-//             animate={{ opacity: [0.5, 1, 0.5] }}
-//             transition={{ duration: 1.5, repeat: Infinity }}
-//             filter="url(#glow)"
-//           />
-//         </motion.g>
-
-//         {/* Right arm */}
-//         <motion.g
-//           animate={{ rotate: [8, -8, 8] }}
-//           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-//           style={{ transformOrigin: "155px 125px" }}
-//         >
-//           <rect x="152" y="114" width="28" height="70" rx="14" fill="url(#bodyGrad)" stroke="#6d28d9" strokeWidth="1.5" />
-//           <motion.circle cx="166" cy="192" r="10" fill="#1e1b4b" stroke="#6d28d9" strokeWidth="1.5" />
-//           <motion.circle
-//             cx="166" cy="192" r="5"
-//             fill="#f472b6"
-//             animate={{ opacity: [0.5, 1, 0.5] }}
-//             transition={{ duration: 1.5, repeat: Infinity, delay: 0.5 }}
-//             filter="url(#glow)"
-//           />
-//         </motion.g>
-
-//         {/* Legs */}
-//         <rect x="68" y="200" width="28" height="50" rx="12" fill="url(#bodyGrad)" stroke="#6d28d9" strokeWidth="1.5" />
-//         <rect x="104" y="200" width="28" height="50" rx="12" fill="url(#bodyGrad)" stroke="#6d28d9" strokeWidth="1.5" />
-
-//         {/* Feet */}
-//         <rect x="62" y="242" width="38" height="14" rx="8" fill="#1e1b4b" stroke="#6d28d9" strokeWidth="1.5" />
-//         <rect x="100" y="242" width="38" height="14" rx="8" fill="#1e1b4b" stroke="#6d28d9" strokeWidth="1.5" />
-//       </svg>
-
-//       {/* Scan line effect */}
-//       <motion.div
-//         className="absolute left-0 right-0 h-12 pointer-events-none"
-//         style={{ background: "linear-gradient(to bottom, transparent, rgba(168,85,247,0.08), transparent)" }}
-//         animate={{ top: ["-10%", "110%"] }}
-//         transition={{ duration: 3.5, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
-//       />
-
-//       {/* Shadow / glow under robot */}
-//       <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-32 h-6 bg-purple-600/30 rounded-full blur-xl" />
-//     </motion.div>
-//   );
-// }
-
-// // Floating data nodes around robot
-// function FloatingNode({ x, y, delay, label }) {
-//   return (
-//     <motion.div
-//       className="absolute text-xs font-mono text-purple-400/70 bg-slate-900/80 border border-purple-500/30 rounded-lg px-2 py-1 whitespace-nowrap"
-//       style={{ left: x, top: y }}
-//       initial={{ opacity: 0, scale: 0 }}
-//       animate={{ opacity: [0, 1, 1, 0], scale: [0.5, 1, 1, 0.5], y: [0, -8, -8, -16] }}
-//       transition={{ duration: 4, delay, repeat: Infinity, ease: "easeInOut" }}
-//     >
-//       {label}
-//     </motion.div>
-//   );
-// }
-
-// // Neural network particle canvas
-// function NeuralParticles() {
-//   const canvasRef = useRef(null);
-
-//   useEffect(() => {
-//     const canvas = canvasRef.current;
-//     if (!canvas) return;
-//     const ctx = canvas.getContext("2d");
-//     canvas.width = canvas.offsetWidth;
-//     canvas.height = canvas.offsetHeight;
-
-//     const nodes = Array.from({ length: 30 }, () => ({
-//       x: Math.random() * canvas.width,
-//       y: Math.random() * canvas.height,
-//       vx: (Math.random() - 0.5) * 0.5,
-//       vy: (Math.random() - 0.5) * 0.5,
-//       r: Math.random() * 2 + 1,
-//       pulse: Math.random() * Math.PI * 2,
-//     }));
-
-//     let animId;
-
-//     function draw() {
-//       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-//       nodes.forEach((node) => {
-//         node.x += node.vx;
-//         node.y += node.vy;
-//         node.pulse += 0.03;
-//         if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
-//         if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
-
-//         const alpha = 0.3 + Math.sin(node.pulse) * 0.2;
-
-//         // Draw connections
-//         nodes.forEach((other) => {
-//           const dx = other.x - node.x;
-//           const dy = other.y - node.y;
-//           const dist = Math.sqrt(dx * dx + dy * dy);
-//           if (dist < 120) {
-//             ctx.beginPath();
-//             ctx.strokeStyle = `rgba(168, 85, 247, ${(1 - dist / 120) * 0.15})`;
-//             ctx.lineWidth = 0.8;
-//             ctx.moveTo(node.x, node.y);
-//             ctx.lineTo(other.x, other.y);
-//             ctx.stroke();
-//           }
-//         });
-
-//         // Draw node
-//         ctx.beginPath();
-//         ctx.arc(node.x, node.y, node.r, 0, Math.PI * 2);
-//         ctx.fillStyle = `rgba(168, 85, 247, ${alpha})`;
-//         ctx.fill();
-//       });
-
-//       animId = requestAnimationFrame(draw);
-//     }
-
-//     draw();
-//     return () => cancelAnimationFrame(animId);
-//   }, []);
-
-//   return (
-//     <canvas
-//       ref={canvasRef}
-//       className="absolute inset-0 w-full h-full"
-//       style={{ pointerEvents: "none" }}
-//     />
-//   );
-// }
-
-// export default function RobotAnimation() {
-//   const floatingLabels = [
-//     { x: "5%", y: "20%", delay: 0, label: "def train_model():" },
-//     { x: "70%", y: "15%", delay: 1.2, label: "accuracy: 97%" },
-//     { x: "75%", y: "65%", delay: 2.5, label: "epoch: 100/100" },
-//     { x: "2%", y: "65%", delay: 0.8, label: "loss: 0.032" },
-//     { x: "60%", y: "82%", delay: 1.8, label: "ResNet50 ✓" },
-//     { x: "10%", y: "80%", delay: 3, label: "NLP Model →" },
-//   ];
-
-//   return (
-//     <div className="relative w-full h-full flex items-center justify-center">
-//       <NeuralParticles />
-
-//       {/* Floating code labels */}
-//       {floatingLabels.map((node, i) => (
-//         <FloatingNode key={i} {...node} />
-//       ))}
-
-//       {/* Orbit rings */}
-//       <div className="relative flex items-center justify-center">
-//         <motion.div
-//           className="absolute w-72 h-72 rounded-full border border-purple-500/20"
-//           animate={{ rotate: 360 }}
-//           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-//         >
-//           <motion.div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-purple-500 rounded-full shadow-lg shadow-purple-500/50" />
-//         </motion.div>
-
-//         <motion.div
-//           className="absolute w-56 h-56 rounded-full border border-cyan-500/20"
-//           animate={{ rotate: -360 }}
-//           transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
-//         >
-//           <motion.div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-cyan-400 rounded-full shadow-lg shadow-cyan-400/50" />
-//         </motion.div>
-
-//         <motion.div
-//           className="absolute w-40 h-40 rounded-full border border-pink-500/20"
-//           animate={{ rotate: 360 }}
-//           transition={{ duration: 9, repeat: Infinity, ease: "linear" }}
-//         >
-//           <motion.div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-pink-400 rounded-full shadow-lg shadow-pink-400/50" />
-//         </motion.div>
-
-//         <Robot />
-//       </div>
-//     </div>
-//   );
-// }
-
 import React, { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { useTheme } from "next-themes";
 
-const MESSAGES = [
-  "Hello! 👋",
-  "I'm Nensi",
-  "AI Engineer",
-  "Let's build!",
-];
+const MESSAGES = ["Hello! 👋", "I'm Nensi", "AI Engineer", "Let's build!"];
 
 function useTypingCycle(messages, typingSpeed = 100, deleteSpeed = 55, pause = 1600) {
   const [text, setText] = useState("");
   const [msgIdx, setMsgIdx] = useState(0);
-  const [phase, setPhase] = useState("typing"); // typing | pausing | deleting
+  const [phase, setPhase] = useState("typing");
 
   useEffect(() => {
     const current = messages[msgIdx];
@@ -339,26 +15,25 @@ function useTypingCycle(messages, typingSpeed = 100, deleteSpeed = 55, pause = 1
       if (text.length < current.length) {
         const t = setTimeout(() => setText(current.slice(0, text.length + 1)), typingSpeed);
         return () => clearTimeout(t);
-      } else {
-        const t = setTimeout(() => setPhase("deleting"), pause);
-        return () => clearTimeout(t);
       }
-    } else if (phase === "deleting") {
+      const t = setTimeout(() => setPhase("deleting"), pause);
+      return () => clearTimeout(t);
+    }
+    if (phase === "deleting") {
       if (text.length > 0) {
         const t = setTimeout(() => setText((p) => p.slice(0, -1)), deleteSpeed);
         return () => clearTimeout(t);
-      } else {
-        setMsgIdx((i) => (i + 1) % messages.length);
-        setPhase("typing");
       }
+      setMsgIdx((i) => (i + 1) % messages.length);
+      setPhase("typing");
     }
   }, [text, phase, msgIdx, messages, typingSpeed, deleteSpeed, pause]);
 
   return text;
 }
 
-// ── Neural canvas background ──────────────────────────────────────────────────
-function NeuralCanvas() {
+// ── Neural canvas background (theme-aware) ────────────────────────────────────
+function NeuralCanvas({ isDark }) {
   const ref = useRef(null);
   useEffect(() => {
     const c = ref.current;
@@ -366,46 +41,62 @@ function NeuralCanvas() {
     const ctx = c.getContext("2d");
     c.width = c.offsetWidth;
     c.height = c.offsetHeight;
-    const pts = Array.from({ length: 28 }, () => ({
-      x: Math.random() * c.width, y: Math.random() * c.height,
-      vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
+    const line = isDark ? "129,140,248" : "99,102,241"; // indigo-400 / indigo-500
+    const dot = isDark ? "165,180,252" : "79,70,229";
+    const pts = Array.from({ length: 26 }, () => ({
+      x: Math.random() * c.width,
+      y: Math.random() * c.height,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: (Math.random() - 0.5) * 0.4,
       p: Math.random() * Math.PI * 2,
     }));
     let id;
     const draw = () => {
       ctx.clearRect(0, 0, c.width, c.height);
       pts.forEach((a, i) => {
-        a.x += a.vx; a.y += a.vy; a.p += 0.02;
+        a.x += a.vx;
+        a.y += a.vy;
+        a.p += 0.02;
         if (a.x < 0 || a.x > c.width) a.vx *= -1;
         if (a.y < 0 || a.y > c.height) a.vy *= -1;
         pts.forEach((b, j) => {
           if (j <= i) return;
           const d = Math.hypot(b.x - a.x, b.y - a.y);
           if (d < 110) {
-            ctx.strokeStyle = `rgba(167,139,250,${(1 - d / 110) * 0.14})`;
+            ctx.strokeStyle = `rgba(${line},${(1 - d / 110) * (isDark ? 0.16 : 0.14)})`;
             ctx.lineWidth = 0.8;
-            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
           }
         });
-        const alpha = 0.18 + Math.sin(a.p) * 0.12;
-        ctx.beginPath(); ctx.arc(a.x, a.y, 1.8, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(196,181,253,${alpha})`; ctx.fill();
+        const alpha = 0.16 + Math.sin(a.p) * 0.12;
+        ctx.beginPath();
+        ctx.arc(a.x, a.y, 1.8, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${dot},${alpha})`;
+        ctx.fill();
       });
       id = requestAnimationFrame(draw);
     };
     draw();
     return () => cancelAnimationFrame(id);
-  }, []);
-  return <canvas ref={ref} className="absolute inset-0 w-full h-full" style={{ pointerEvents: "none" }} />;
+  }, [isDark]);
+  return <canvas ref={ref} className="absolute inset-0 h-full w-full" style={{ pointerEvents: "none" }} />;
 }
 
-// ── Floating label ────────────────────────────────────────────────────────────
-function Tag({ style, label, color, delay }) {
-  const cls = { purple: "border-purple-500/40 text-purple-300", cyan: "border-cyan-500/40 text-cyan-300", pink: "border-pink-500/40 text-pink-300", green: "border-green-500/40 text-green-300" };
+// ── Floating label (theme-aware) ──────────────────────────────────────────────
+function Tag({ style, label, tone, delay, depth = 40 }) {
+  const tones = {
+    indigo: "border-indigo-500/40 text-indigo-600 dark:text-indigo-300",
+    violet: "border-violet-500/40 text-violet-600 dark:text-violet-300",
+    sky: "border-sky-500/40 text-sky-600 dark:text-sky-300",
+    emerald: "border-emerald-500/40 text-emerald-600 dark:text-emerald-300",
+  };
   return (
     <motion.div
-      className={`absolute text-[11px] font-mono border ${cls[color]} bg-slate-950/90 backdrop-blur-sm rounded-lg px-2 py-0.5 whitespace-nowrap`}
-      style={style}
+      className={`absolute rounded-lg border bg-white/85 px-2 py-0.5 font-mono text-[11px] shadow-sm backdrop-blur-sm dark:bg-slate-950/85 ${tones[tone]}`}
+      style={{ ...style, transform: `translateZ(${depth}px)` }}
       animate={{ opacity: [0, 1, 1, 0], y: [0, -8, -8, -16] }}
       transition={{ duration: 4.2, delay, repeat: Infinity, ease: "easeInOut" }}
     >
@@ -414,29 +105,30 @@ function Tag({ style, label, color, delay }) {
   );
 }
 
-// ── The robot SVG ─────────────────────────────────────────────────────────────
+// ── The robot SVG (recoloured to the indigo/violet accent) ────────────────────
 function AstroBot({ text }) {
   return (
     <motion.div
       className="relative"
+      style={{ transform: "translateZ(60px)" }}
       animate={{ y: [0, -13, 0] }}
       transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
     >
       <svg viewBox="0 0 240 340" width="240" height="340" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <radialGradient id="g-helm" cx="38%" cy="32%" r="68%">
-            <stop offset="0%" stopColor="#f0e6ff" />
-            <stop offset="45%" stopColor="#a78bfa" />
-            <stop offset="100%" stopColor="#4c1d95" />
+            <stop offset="0%" stopColor="#eef2ff" />
+            <stop offset="45%" stopColor="#818cf8" />
+            <stop offset="100%" stopColor="#3730a3" />
           </radialGradient>
           <radialGradient id="g-visor" cx="35%" cy="30%" r="65%">
-            <stop offset="0%" stopColor="#1a0a40" />
-            <stop offset="100%" stopColor="#0a0020" />
+            <stop offset="0%" stopColor="#141033" />
+            <stop offset="100%" stopColor="#07031a" />
           </radialGradient>
           <radialGradient id="g-body" cx="38%" cy="28%" r="70%">
-            <stop offset="0%" stopColor="#c4b5fd" />
-            <stop offset="55%" stopColor="#7c3aed" />
-            <stop offset="100%" stopColor="#3b0764" />
+            <stop offset="0%" stopColor="#c7d2fe" />
+            <stop offset="55%" stopColor="#6366f1" />
+            <stop offset="100%" stopColor="#312e81" />
           </radialGradient>
           <radialGradient id="g-screen" cx="50%" cy="50%" r="55%">
             <stop offset="0%" stopColor="#0c1445" />
@@ -448,139 +140,136 @@ function AstroBot({ text }) {
             <stop offset="100%" stopColor="#0369a1" />
           </radialGradient>
           <radialGradient id="g-arm" cx="35%" cy="25%" r="70%">
-            <stop offset="0%" stopColor="#c4b5fd" />
-            <stop offset="100%" stopColor="#5b21b6" />
-          </radialGradient>
-          <radialGradient id="g-leg" cx="35%" cy="25%" r="70%">
-            <stop offset="0%" stopColor="#c4b5fd" />
-            <stop offset="100%" stopColor="#5b21b6" />
+            <stop offset="0%" stopColor="#c7d2fe" />
+            <stop offset="100%" stopColor="#4338ca" />
           </radialGradient>
           <filter id="f-glow" x="-60%" y="-60%" width="220%" height="220%">
             <feGaussianBlur stdDeviation="5" result="b" />
-            <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+            <feMerge>
+              <feMergeNode in="b" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
           </filter>
           <filter id="f-drop">
-            <feDropShadow dx="0" dy="6" stdDeviation="6" floodColor="#3b0764" floodOpacity="0.5" />
-          </filter>
-          <filter id="f-screen-glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="3" result="b" />
-            <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+            <feDropShadow dx="0" dy="6" stdDeviation="6" floodColor="#312e81" floodOpacity="0.5" />
           </filter>
         </defs>
 
         <g className="bot-sway">
-          {/* ── Antenna ── */}
-          <motion.line x1="120" y1="14" x2="120" y2="42"
-            stroke="#a78bfa" strokeWidth="3" strokeLinecap="round"
-            animate={{ opacity: [0.6, 1, 0.6] }} transition={{ duration: 1.5, repeat: Infinity }} />
-          <motion.circle cx="120" cy="11" r="7" fill="#c084fc" filter="url(#f-glow)"
+          <motion.line
+            x1="120" y1="14" x2="120" y2="42"
+            stroke="#818cf8" strokeWidth="3" strokeLinecap="round"
+            animate={{ opacity: [0.6, 1, 0.6] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          />
+          <motion.circle
+            cx="120" cy="11" r="7" fill="#a5b4fc" filter="url(#f-glow)"
             animate={{ r: [7, 10, 7], opacity: [0.7, 1, 0.7] }}
-            transition={{ duration: 1.5, repeat: Infinity }} />
+            transition={{ duration: 1.5, repeat: Infinity }}
+          />
 
-          {/* ── Egg-shaped head dome ── */}
           <ellipse cx="120" cy="120" rx="84" ry="76" fill="url(#g-helm)" filter="url(#f-drop)" />
-
-          {/* ── Wide visor band ── */}
           <rect x="48" y="98" width="144" height="66" rx="33" fill="url(#g-visor)" />
           <ellipse cx="92" cy="116" rx="30" ry="10" fill="white" opacity="0.06" transform="rotate(-12,92,116)" />
 
-          {/* ── Eyes (blink only) ── */}
           <g>
             {[98, 142].map((cx, i) => (
               <g key={i}>
-                <motion.circle cx={cx} cy="128" r="20" fill="none" stroke="#7dd3fc" strokeWidth="1.5" opacity="0.5"
+                <motion.circle
+                  cx={cx} cy="128" r="20" fill="none" stroke="#7dd3fc" strokeWidth="1.5" opacity="0.5"
                   animate={{ r: [20, 24, 20], opacity: [0.4, 0.7, 0.4] }}
-                  transition={{ duration: 2.2, repeat: Infinity, delay: i * 0.5 }} />
+                  transition={{ duration: 2.2, repeat: Infinity, delay: i * 0.5 }}
+                />
                 <circle cx={cx} cy="128" r="17" fill="url(#g-eye)" filter="url(#f-glow)" />
                 <circle cx={cx} cy="128" r="10" fill="#0a0825" />
-                <motion.circle cx={cx} cy="128" r="5.5" fill="#38bdf8"
+                <motion.circle
+                  cx={cx} cy="128" r="5.5" fill="#38bdf8"
                   animate={{ r: [5.5, 7.5, 5.5], opacity: [0.8, 1, 0.8] }}
-                  transition={{ duration: 1.8, repeat: Infinity, delay: i * 0.3 }} />
+                  transition={{ duration: 1.8, repeat: Infinity, delay: i * 0.3 }}
+                />
                 <circle cx={cx - 4} cy="123" r="3" fill="white" opacity="0.55" />
-                {/* blink */}
-                <motion.ellipse cx={cx} cy="128" rx="17" ry="17" fill="#0a0825"
+                <motion.ellipse
+                  cx={cx} cy="128" rx="17" ry="17" fill="#0a0825"
                   animate={{ ry: [0, 0, 17, 0, 0] }}
                   transition={{ duration: 5.5, repeat: Infinity, times: [0, 0.43, 0.5, 0.57, 1] }}
-                  style={{ transformOrigin: `${cx}px 128px` }} />
+                  style={{ transformOrigin: `${cx}px 128px` }}
+                />
               </g>
             ))}
           </g>
 
-          {/* ── Cheeks ── */}
-          <ellipse cx="74" cy="150" rx="11" ry="6" fill="#f9a8d4" opacity="0.25" />
-          <ellipse cx="166" cy="150" rx="11" ry="6" fill="#f9a8d4" opacity="0.25" />
+          <ellipse cx="74" cy="150" rx="11" ry="6" fill="#818cf8" opacity="0.3" />
+          <ellipse cx="166" cy="150" rx="11" ry="6" fill="#818cf8" opacity="0.3" />
 
-          {/* ── Side hover fins (tilt) ── */}
           <g className="bot-fin-left">
             <ellipse cx="42" cy="256" rx="28" ry="13" fill="url(#g-arm)" filter="url(#f-drop)" />
-            <motion.circle cx="26" cy="256" r="4" fill="#a855f7" filter="url(#f-glow)"
-              animate={{ opacity:[0.5,1,0.5] }} transition={{ duration:1.5, repeat:Infinity }} />
+            <motion.circle cx="26" cy="256" r="4" fill="#818cf8" filter="url(#f-glow)" animate={{ opacity: [0.5, 1, 0.5] }} transition={{ duration: 1.5, repeat: Infinity }} />
           </g>
           <g className="bot-fin-right">
             <ellipse cx="198" cy="256" rx="28" ry="13" fill="url(#g-arm)" filter="url(#f-drop)" />
-            <motion.circle cx="214" cy="256" r="4" fill="#f472b6" filter="url(#f-glow)"
-              animate={{ opacity:[0.5,1,0.5] }} transition={{ duration:1.5, repeat:Infinity, delay:0.4 }} />
+            <motion.circle cx="214" cy="256" r="4" fill="#a5b4fc" filter="url(#f-glow)" animate={{ opacity: [0.5, 1, 0.5] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0.4 }} />
           </g>
 
-          {/* ── Floating body pod (gap above = hovering) ── */}
           <ellipse cx="120" cy="258" rx="64" ry="52" fill="url(#g-body)" filter="url(#f-drop)" />
-          <ellipse cx="120" cy="250" rx="34" ry="22" fill="#ede9fe" opacity="0.12" />
+          <ellipse cx="120" cy="250" rx="34" ry="22" fill="#eef2ff" opacity="0.12" />
 
-          {/* ── Chest screen ── */}
-          <rect x="78" y="236" width="84" height="46" rx="12" fill="#0a0020" stroke="#7c3aed" strokeWidth="2" />
+          <rect x="78" y="236" width="84" height="46" rx="12" fill="#0a0020" stroke="#6366f1" strokeWidth="2" />
           <rect x="80" y="238" width="80" height="42" rx="10" fill="url(#g-screen)" />
-          <motion.rect x="80" y="238" width="80" height="8" rx="4" fill="#818cf8" opacity="0.06"
+          <motion.rect
+            x="80" y="238" width="80" height="8" rx="4" fill="#818cf8" opacity="0.08"
             animate={{ y: [238, 272, 238] }}
-            transition={{ duration: 2.8, repeat: Infinity, ease: "linear" }} />
-          {[[84,242],[156,242],[84,276],[156,276]].map(([x,y],i)=>(
-            <motion.circle key={i} cx={x} cy={y} r="2.3" fill="#7c3aed"
-              animate={{ opacity:[0.3,1,0.3] }} transition={{ duration:1.4, repeat:Infinity, delay:i*0.2 }} />
+            transition={{ duration: 2.8, repeat: Infinity, ease: "linear" }}
+          />
+          {[[84, 242], [156, 242], [84, 276], [156, 276]].map(([x, y], i) => (
+            <motion.circle key={i} cx={x} cy={y} r="2.3" fill="#6366f1" animate={{ opacity: [0.3, 1, 0.3] }} transition={{ duration: 1.4, repeat: Infinity, delay: i * 0.2 }} />
           ))}
           <foreignObject x="82" y="246" width="76" height="28">
             <div
               style={{
-                width:"100%", height:"100%",
-                display:"flex", alignItems:"center", justifyContent:"center",
-                fontFamily:"'Courier New',monospace",
-                fontSize:10, color:"#67e8f9",
-                letterSpacing:"0.04em", overflow:"hidden",
-                userSelect:"none",
+                width: "100%", height: "100%",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                fontFamily: "'JetBrains Mono','Courier New',monospace",
+                fontSize: 10, color: "#7dd3fc",
+                letterSpacing: "0.04em", overflow: "hidden", userSelect: "none",
               }}
             >
-              <span style={{ whiteSpace:"nowrap" }}>
+              <span style={{ whiteSpace: "nowrap" }}>
                 {text}
-                <span style={{ display:"inline-block", width:2, height:11, background:"#22d3ee", marginLeft:2, verticalAlign:"middle", animation:"blink 0.9s step-end infinite" }} />
+                <span style={{ display: "inline-block", width: 2, height: 11, background: "#38bdf8", marginLeft: 2, verticalAlign: "middle", animation: "blink 0.9s step-end infinite" }} />
               </span>
             </div>
           </foreignObject>
 
-          {/* ── Bottom LED strip ── */}
-          {[-24,-12,0,12,24].map((dx,i)=>(
-            <motion.circle key={i} cx={120+dx} cy="300" r="3.2"
-              fill={["#a855f7","#818cf8","#38bdf8","#818cf8","#a855f7"][i]}
+          {[-24, -12, 0, 12, 24].map((dx, i) => (
+            <motion.circle
+              key={i} cx={120 + dx} cy="300" r="3.2"
+              fill={["#818cf8", "#6366f1", "#38bdf8", "#6366f1", "#818cf8"][i]}
               filter="url(#f-glow)"
-              animate={{ opacity:[0.3,1,0.3] }}
-              transition={{ duration:1.3, repeat:Infinity, delay:i*0.2 }} />
+              animate={{ opacity: [0.3, 1, 0.3] }}
+              transition={{ duration: 1.3, repeat: Infinity, delay: i * 0.2 }}
+            />
           ))}
 
-          {/* ── Hover thruster jet (replaces legs) ── */}
-          <motion.ellipse cx="120" cy="318" rx="30" ry="10" fill="#38bdf8" filter="url(#f-glow)"
-            animate={{ rx:[26,34,26], ry:[8,14,8], opacity:[0.35,0.7,0.35] }}
-            transition={{ duration:0.9, repeat:Infinity, ease:"easeInOut" }} />
-          {[-14,0,14].map((dx,i)=>(
-            <motion.circle key={i} cx={120+dx} r="3" fill="#7dd3fc" filter="url(#f-glow)"
-              animate={{ cy:[316,334], opacity:[0.9,0] }}
-              transition={{ duration:1.1, repeat:Infinity, delay:i*0.35, ease:"easeIn" }} />
+          <motion.ellipse
+            cx="120" cy="318" rx="30" ry="10" fill="#38bdf8" filter="url(#f-glow)"
+            animate={{ rx: [26, 34, 26], ry: [8, 14, 8], opacity: [0.35, 0.7, 0.35] }}
+            transition={{ duration: 0.9, repeat: Infinity, ease: "easeInOut" }}
+          />
+          {[-14, 0, 14].map((dx, i) => (
+            <motion.circle
+              key={i} cx={120 + dx} r="3" fill="#7dd3fc" filter="url(#f-glow)"
+              animate={{ cy: [316, 334], opacity: [0.9, 0] }}
+              transition={{ duration: 1.1, repeat: Infinity, delay: i * 0.35, ease: "easeIn" }}
+            />
           ))}
         </g>
       </svg>
 
-      {/* ground shadow */}
       <motion.div
-        className="absolute -bottom-5 left-1/2 -translate-x-1/2 rounded-full bg-violet-600/20 blur-2xl"
+        className="absolute -bottom-5 left-1/2 -translate-x-1/2 rounded-full bg-indigo-600/25 blur-2xl"
         style={{ width: 130, height: 20 }}
-        animate={{ scaleX:[1,1.25,1], opacity:[0.3,0.5,0.3] }}
-        transition={{ duration:4, repeat:Infinity, ease:"easeInOut" }}
+        animate={{ scaleX: [1, 1.25, 1], opacity: [0.3, 0.5, 0.3] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       />
     </motion.div>
   );
@@ -588,56 +277,89 @@ function AstroBot({ text }) {
 
 export default function RobotAnimation() {
   const text = useTypingCycle(MESSAGES);
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const isDark = !mounted || resolvedTheme === "dark";
+
+  // ── 3D parallax: track pointer and tilt the whole scene ──
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const rotateY = useSpring(useTransform(mx, [-0.5, 0.5], [-16, 16]), { stiffness: 120, damping: 18 });
+  const rotateX = useSpring(useTransform(my, [-0.5, 0.5], [12, -12]), { stiffness: 120, damping: 18 });
+
+  const handleMove = (e) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    mx.set((e.clientX - r.left) / r.width - 0.5);
+    my.set((e.clientY - r.top) / r.height - 0.5);
+  };
+  const reset = () => {
+    mx.set(0);
+    my.set(0);
+  };
 
   const tags = [
-    { style:{ left:"1%",  top:"14%" }, label:"model.fit() ▶",   color:"purple", delay:0   },
-    { style:{ left:"68%", top:"9%"  }, label:"val_acc: 97.3%",  color:"cyan",   delay:1.5 },
-    { style:{ left:"72%", top:"64%" }, label:"LangGraph →",     color:"pink",   delay:2.8 },
-    { style:{ left:"0%",  top:"66%" }, label:"loss: 0.032",     color:"green",  delay:1.0 },
-    { style:{ left:"62%", top:"80%" }, label:"ResNet-50 ✓",     color:"purple", delay:2.2 },
-    { style:{ left:"2%",  top:"80%" }, label:"RAG pipeline ✓",  color:"cyan",   delay:3.6 },
+    { style: { left: "1%", top: "14%" }, label: "model.fit() ▶", tone: "indigo", delay: 0, depth: 30 },
+    { style: { left: "66%", top: "9%" }, label: "val_acc: 97.3%", tone: "sky", delay: 1.5, depth: 55 },
+    { style: { left: "72%", top: "64%" }, label: "LangGraph →", tone: "violet", delay: 2.8, depth: 20 },
+    { style: { left: "0%", top: "66%" }, label: "loss: 0.032", tone: "emerald", delay: 1.0, depth: 45 },
+    { style: { left: "60%", top: "80%" }, label: "ResNet-50 ✓", tone: "indigo", delay: 2.2, depth: 25 },
+    { style: { left: "2%", top: "80%" }, label: "RAG pipeline ✓", tone: "sky", delay: 3.6, depth: 50 },
   ];
 
   return (
-    <div className="relative w-full h-full flex items-center justify-center">
-      <NeuralCanvas />
-      {tags.map((t, i) => <Tag key={i} {...t} />)}
+    <div
+      className="relative flex h-full w-full items-center justify-center"
+      onPointerMove={handleMove}
+      onPointerLeave={reset}
+      style={{ perspective: 1000 }}
+    >
+      <NeuralCanvas isDark={isDark} />
 
-      <div className="relative flex items-center justify-center">
-        {/* orbits — three rings, different sizes & directions */}
-        <motion.div className="absolute w-[340px] h-[340px] rounded-full"
-          style={{ border:"1px dashed rgba(139,92,246,0.22)" }}
-          animate={{ rotate:360 }} transition={{ duration:24, repeat:Infinity, ease:"linear" }}>
-          <motion.div className="absolute -top-2.5 left-1/2 -translate-x-1/2 w-5 h-5 bg-violet-400 rounded-full shadow-lg shadow-violet-400/60"
-            animate={{ scale:[1,1.5,1] }} transition={{ duration:2, repeat:Infinity }} />
+      <motion.div
+        className="relative flex items-center justify-center"
+        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+      >
+        {tags.map((t, i) => (
+          <Tag key={i} {...t} />
+        ))}
+
+        {/* orbit rings — layered at different depths for parallax */}
+        <motion.div
+          className="absolute h-[340px] w-[340px] rounded-full"
+          style={{ border: "1px dashed rgba(99,102,241,0.28)", transform: "translateZ(0px)" }}
+          animate={{ rotate: 360 }}
+          transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
+        >
+          <motion.div className="absolute -top-2.5 left-1/2 h-5 w-5 -translate-x-1/2 rounded-full bg-indigo-400 shadow-lg shadow-indigo-400/60" animate={{ scale: [1, 1.5, 1] }} transition={{ duration: 2, repeat: Infinity }} />
         </motion.div>
-        <motion.div className="absolute w-60 h-60 rounded-full border border-pink-400/15"
-          animate={{ rotate:-360 }} transition={{ duration:16, repeat:Infinity, ease:"linear" }}>
-          <motion.div className="absolute -top-2 left-1/2 -translate-x-1/2 w-3.5 h-3.5 bg-pink-300 rounded-full shadow-lg shadow-pink-300/50"
-            animate={{ scale:[1,1.4,1] }} transition={{ duration:1.8, repeat:Infinity }} />
+        <motion.div
+          className="absolute h-60 w-60 rounded-full border border-violet-400/20"
+          style={{ transform: "translateZ(35px)" }}
+          animate={{ rotate: -360 }}
+          transition={{ duration: 16, repeat: Infinity, ease: "linear" }}
+        >
+          <motion.div className="absolute -top-2 left-1/2 h-3.5 w-3.5 -translate-x-1/2 rounded-full bg-violet-400 shadow-lg shadow-violet-400/50" animate={{ scale: [1, 1.4, 1] }} transition={{ duration: 1.8, repeat: Infinity }} />
         </motion.div>
-        <motion.div className="absolute w-[440px] h-[440px] rounded-full"
-          style={{ border:"1px dotted rgba(56,189,248,0.18)" }}
-          animate={{ rotate:360 }} transition={{ duration:32, repeat:Infinity, ease:"linear" }}>
-          <motion.div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-cyan-300 rounded-full shadow-lg shadow-cyan-300/60"
-            animate={{ scale:[1,1.6,1] }} transition={{ duration:2.4, repeat:Infinity }} />
+        <motion.div
+          className="absolute h-[440px] w-[440px] rounded-full"
+          style={{ border: "1px dotted rgba(56,189,248,0.22)", transform: "translateZ(-20px)" }}
+          animate={{ rotate: 360 }}
+          transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
+        >
+          <motion.div className="absolute -top-2 left-1/2 h-4 w-4 -translate-x-1/2 rounded-full bg-sky-300 shadow-lg shadow-sky-300/60" animate={{ scale: [1, 1.6, 1] }} transition={{ duration: 2.4, repeat: Infinity }} />
         </motion.div>
-        <motion.div className="absolute w-[400px] h-[400px] rounded-full"
-          style={{ border:"1px dashed rgba(52,211,153,0.16)" }}
-          animate={{ rotate:-360 }} transition={{ duration:20, repeat:Infinity, ease:"linear" }}>
-          <motion.div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-emerald-300 rounded-full shadow-lg shadow-emerald-300/60"
-            animate={{ scale:[1,1.5,1] }} transition={{ duration:2.1, repeat:Infinity }} />
-        </motion.div>
-        {/* aura glow */}
-        <motion.div className="absolute w-72 h-72 rounded-full pointer-events-none"
-          style={{ background:"radial-gradient(circle, rgba(139,92,246,0.13) 0%, transparent 70%)" }}
-          animate={{ scale:[1,1.12,1], opacity:[0.5,1,0.5] }}
-          transition={{ duration:3.5, repeat:Infinity }} />
+
+        <motion.div
+          className="pointer-events-none absolute h-72 w-72 rounded-full"
+          style={{ background: "radial-gradient(circle, rgba(99,102,241,0.18) 0%, transparent 70%)" }}
+          animate={{ scale: [1, 1.12, 1], opacity: [0.5, 1, 0.5] }}
+          transition={{ duration: 3.5, repeat: Infinity }}
+        />
 
         <AstroBot text={text} />
-      </div>
+      </motion.div>
 
-      {/* CSS for blinking cursor + robot limb motion */}
       <style>{`
         @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
         @keyframes botSway{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}

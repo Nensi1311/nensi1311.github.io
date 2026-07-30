@@ -1,159 +1,139 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, FileText, ChevronDown } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import RobotAnimation from "./RobotSection";
 
+const metrics = [
+  { value: "9.41", label: "CGPA / 10" },
+  { value: "IF 3.0", label: "Wiley publication" },
+];
+
 export default function HeroSection() {
-  const roles = ["AI-ML Engineer", "Deep Learning Enthusiast", "Researcher"];
+  const roles = ["AI-ML Engineer", "Deep Learning Researcher", "Applied Scientist"];
   const [currentRole, setCurrentRole] = React.useState(0);
 
   React.useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentRole((prev) => (prev + 1) % roles.length);
-    }, 3000);
+    const interval = setInterval(
+      () => setCurrentRole((prev) => (prev + 1) % roles.length),
+      2800
+    );
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <section className="min-h-screen relative flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl animate-pulse delay-500" />
-      </div>
-
-      {/* Grid pattern overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px]" />
-
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center justify-between gap-12 min-h-screen py-24">
-        
-        {/* Left: Text content */}
+    <section className="relative flex min-h-screen items-center overflow-hidden bg-transparent">
+      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col-reverse items-center gap-12 px-6 py-28 lg:flex-row lg:justify-between lg:gap-8">
+        {/* Left: content */}
         <div className="flex-1 text-center lg:text-left">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6 }}
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/60 px-3.5 py-1.5 text-xs font-medium text-slate-600 backdrop-blur dark:border-slate-800 dark:bg-slate-900/60 dark:text-slate-300"
           >
-            <p className="text-purple-400 font-medium tracking-widest uppercase text-sm mb-6 flex items-center gap-2 justify-center lg:justify-start">
-              <span className="inline-block w-8 h-px bg-purple-400" />
-              AI-ML Engineer
-              <span className="inline-block w-8 h-px bg-purple-400" />
-            </p>
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+            </span>
+            Open to AI / ML roles &amp; collaborations
           </motion.div>
 
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 tracking-tight"
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="text-4xl font-extrabold leading-[1.05] tracking-tight text-slate-900 dark:text-white sm:text-5xl lg:text-6xl"
           >
-            Hi, I'm{" "}
-            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
-              Nensi
-            </span>
-            <br />Pansuriya
+            Nensi Pansuriya
           </motion.h1>
 
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="h-12 flex items-center mb-6 justify-center lg:justify-start"
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="mt-4 flex h-9 items-center justify-center gap-2 font-mono text-lg text-slate-700 dark:text-slate-300 lg:justify-start"
           >
-            <span className="text-lg md:text-xl text-cyan-400 font-mono">
-              &gt;{" "}
-              <motion.span
-                key={currentRole}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="text-slate-300"
-              >
-                {roles[currentRole]}
-              </motion.span>
-              <motion.span
-                animate={{ opacity: [1, 0, 1] }}
-                transition={{ duration: 0.8, repeat: Infinity }}
-                className="text-purple-400"
-              >_</motion.span>
-            </span>
+            <span className="text-indigo-500">&gt;</span>
+            <motion.span
+              key={currentRole}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-gradient font-semibold"
+            >
+              {roles[currentRole]}
+            </motion.span>
+            <motion.span
+              animate={{ opacity: [1, 0, 1] }}
+              transition={{ duration: 0.9, repeat: Infinity }}
+              className="text-indigo-500"
+            >
+              _
+            </motion.span>
           </motion.div>
 
           <motion.p
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="text-slate-400 text-lg max-w-xl mx-auto lg:mx-0 mb-10 leading-relaxed"
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-slate-600 dark:text-slate-400 lg:mx-0 md:text-lg"
           >
-            A tech-forward AI engineer, always curious to learn new technologies and
-            push the boundaries of what's next.
+            I build and fine-tune deep-learning, NLP and computer-vision systems
+            that move from research into production — from a{" "}
+            <span className="font-medium text-slate-900 dark:text-white">
+              peer-reviewed Wiley publication
+            </span>{" "}
+            to{" "}
+            <span className="font-medium text-slate-900 dark:text-white">
+              first-place Kaggle
+            </span>{" "}
+            wins.
           </motion.p>
 
+          {/* Metrics */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-wrap items-center gap-4 mb-10 justify-center lg:justify-start"
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="mx-auto mt-8 grid max-w-xs grid-cols-2 gap-3 lg:mx-0"
           >
-            <a
-              href="mailto:nensipansuriya1311@gmail.com"
-              className="group flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-white font-medium hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
-            >
-              <Mail className="w-5 h-5" />
-              Get in Touch
-            </a>
-            <a
-              href="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/user_68b7cc6cb5ce888f3f2a4624/bb69fd7c4_Resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-6 py-3 border border-slate-700 rounded-full text-white font-medium hover:bg-slate-800 hover:border-slate-600 transition-all duration-300"
-            >
-              <FileText className="w-5 h-5" />
-              Resume
-            </a>
+            {metrics.map((m) => (
+              <div
+                key={m.label}
+                className="rounded-xl border border-slate-200 bg-white/60 px-2 py-3 text-center backdrop-blur dark:border-slate-800 dark:bg-slate-900/50"
+              >
+                <div className="text-lg font-bold text-slate-900 dark:text-white sm:text-xl">
+                  {m.value}
+                </div>
+                <div className="mt-0.5 text-[10px] leading-tight text-slate-500 dark:text-slate-400 sm:text-[11px]">
+                  {m.label}
+                </div>
+              </div>
+            ))}
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex items-center gap-4 justify-center lg:justify-start"
-          >
-            <a href="https://github.com/Nensi1311" target="_blank" rel="noopener noreferrer"
-              className="p-3 rounded-full bg-slate-800/50 text-slate-400 hover:text-white hover:bg-slate-700 transition-all duration-300">
-              <Github className="w-5 h-5" />
-            </a>
-            <a href="https://www.linkedin.com/in/nensi-pansuriya/" target="_blank" rel="noopener noreferrer"
-              className="p-3 rounded-full bg-slate-800/50 text-slate-400 hover:text-white hover:bg-slate-700 transition-all duration-300">
-              <Linkedin className="w-5 h-5" />
-            </a>
-            <a href="mailto:nensipansuriya1311@gmail.com"
-              className="p-3 rounded-full bg-slate-800/50 text-slate-400 hover:text-white hover:bg-slate-700 transition-all duration-300">
-              <Mail className="w-5 h-5" />
-            </a>
-          </motion.div>
         </div>
 
-        {/* Right: Robot animation */}
+        {/* Right: robot */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
+          initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.4 }}
-          className="flex-1 w-full h-[500px] relative flex items-center justify-center"
+          transition={{ duration: 1, delay: 0.35 }}
+          className="relative flex h-[380px] w-full flex-1 items-center justify-center sm:h-[460px] lg:h-[520px]"
         >
           <RobotAnimation />
         </motion.div>
       </div>
 
-      <motion.div
+      <motion.a
+        href="#about"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        aria-label="Scroll to about"
+        className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 text-slate-400 dark:text-slate-600 md:block"
       >
-        <ChevronDown className="w-8 h-8 text-slate-500 animate-bounce" />
-      </motion.div>
+        <ArrowDown className="h-6 w-6 animate-bounce" />
+      </motion.a>
     </section>
   );
 }
